@@ -58,7 +58,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
 
     class EpisodeViewHolder extends RecyclerView.ViewHolder {
 
-//        final TextView epiCount;
         final TextView epiNameTV;
         final TextView seriesNameTextView;
         final TextView noTextView;
@@ -66,7 +65,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         public EpisodeViewHolder(@NonNull View itemView) {
             super(itemView);
 
-//            epiCount = itemView.findViewById(R.id.tv_epi_count);
             epiNameTV = itemView.findViewById(R.id.tv_epi_name);
             seriesNameTextView = itemView.findViewById(R.id.tv_epi_series);
             noTextView = itemView.findViewById(R.id.tv_epi_no);
