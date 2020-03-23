@@ -35,9 +35,10 @@ public class SeriesBottomSheet extends BaseBottomSheet {
     private ArrayList<Genre> genres = new ArrayList<>();
     private int selectedGenrePosition = 0;
 
-    Series series = null;
+    private Series series = null;
 
-    public SeriesBottomSheet() {}
+    public SeriesBottomSheet() {
+    }
 
     public SeriesBottomSheet(Series series) {
         this.series = series;
@@ -61,11 +62,11 @@ public class SeriesBottomSheet extends BaseBottomSheet {
             addSeries.setText("Edit Series");
             titleEditText.setText(series.getTitle());
             descEditText.setText(series.getDesc());
-//            epiCountEditText.setText(series.getEpisodeCount());
+            epiCountEditText.setText(series.getEpisodeCount());
             imageUrlEditText.setText(series.getImageUrl());
         }
 
-//        epiCountEditText.setText("0");
+        epiCountEditText.setText("0");
 
         db.collection(Genre.COLLECTION_NAME)
                 .get()
@@ -135,11 +136,11 @@ public class SeriesBottomSheet extends BaseBottomSheet {
                     return;
                 }
 
-                String id ;
+                String id;
 
                 if (series != null) {
                     id = series.getId();
-                }else {
+                } else {
                     id = UUID.randomUUID().toString();
                 }
 
@@ -156,7 +157,7 @@ public class SeriesBottomSheet extends BaseBottomSheet {
 
                                 Toast.makeText(view.getContext(), "Save Success", Toast.LENGTH_SHORT).show();
 
-                                if (series != null) {
+                                if (SeriesBottomSheet.this.series != null) {
                                     dismiss();
                                     return;
                                 }
@@ -180,6 +181,6 @@ public class SeriesBottomSheet extends BaseBottomSheet {
             }
         });
 
-                return view;
+        return view;
     }
 }

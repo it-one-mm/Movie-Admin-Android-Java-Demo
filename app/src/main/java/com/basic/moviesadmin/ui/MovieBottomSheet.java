@@ -146,7 +146,7 @@ public class MovieBottomSheet extends BaseBottomSheet {
 
                                 Toast.makeText(getContext(), "Save Success", Toast.LENGTH_SHORT).show();
 
-                                if (movie != null) {
+                                if (MovieBottomSheet.this.movie != null) {
                                     dismiss();
                                     return;
                                 }

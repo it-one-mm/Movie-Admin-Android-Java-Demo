@@ -32,7 +32,7 @@ public class EpisodeFormBottomSheet extends  BaseBottomSheet{
     private ArrayList<Series> series1 = new ArrayList<>();
     private int selectedSeriesPosition = 0;
 
-    Episode episode = null;
+    private Episode episode = null;
 
     public EpisodeFormBottomSheet() {}
     public EpisodeFormBottomSheet(Episode episode) {
@@ -106,7 +106,6 @@ public class EpisodeFormBottomSheet extends  BaseBottomSheet{
                 String epiId;
 
                 if (EpisodeFormBottomSheet.this.episode != null) {
-
                     epiId = EpisodeFormBottomSheet.this.episode.getId();
                 }else {
                     epiId = UUID.randomUUID().toString();
@@ -126,7 +125,7 @@ public class EpisodeFormBottomSheet extends  BaseBottomSheet{
 
                                 Toast.makeText(getContext(), "save success", Toast.LENGTH_SHORT).show();
 
-                                if (episode != null) {
+                                if (EpisodeFormBottomSheet.this.episode != null) {
                                     dismiss();
                                     return;
                                 }
