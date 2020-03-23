@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "860137570560",
+    "firebase_url": "https://movies-app-first.firebaseio.com",
+    "project_id": "movies-app-first",
+    "storage_bucket": "movies-app-first.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860137570560:android:257dc1a15e4f0205c9b3e5",
+        "android_client_info": {
+          "package_name": "com.basic.moviesadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860137570560-qb8qha1dr2uneoooankqblvnu9osfpp9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.basic.moviesadmin",
+            "certificate_hash": "78904c0927143f1c21f45172126ab967c3b1ceb7"
+          }
+        },
+        {
+          "client_id": "860137570560-9ko23vkv569etrdr06hubg1r3jt2017b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfS0rKAS8gLafeBQWtX3G9p6bjsjO0GQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860137570560-9ko23vkv569etrdr06hubg1r3jt2017b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

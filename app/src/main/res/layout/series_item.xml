@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_series_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No.1"
+            android:layout_below="@id/image_url"/>
+
+        <TextView
+            android:id="@+id/tv_series_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:layout_below="@id/tv_series_no"
+            android:textSize="@dimen/form_title"
+            android:textColor="@color/gray"/>
+
+        <TextView
+            android:id="@+id/tv_genre_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Action"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/image_url"
+            android:textColor="#212121"/>
+
+        <TextView
+            android:id="@+id/tv_epi_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_genre_name"
+            android:text="Episodes_1"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

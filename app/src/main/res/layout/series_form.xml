@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/root_padding">
+
+        <TextView
+            android:id="@+id/tv_add_series"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="ADD SERIES"
+            android:textSize="@dimen/form_title"
+            android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/btn_series_save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Save"
+            android:textColor="#fff"
+            android:background="@color/colorAccent"
+            android:textSize="@dimen/form_title"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_series_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Series Title ..."/>
+
+    <EditText
+        android:id="@+id/et_series_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Desc..."/>
+
+    <EditText
+        android:id="@+id/et_epi_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="EpisodeCount..."
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/et_image_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ImageUrl..."/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Genres"/>
+    <Spinner
+        android:id="@+id/sp_genres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

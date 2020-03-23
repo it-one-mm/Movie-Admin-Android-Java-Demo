@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_genres"
+        android:title="Genres"
+        android:icon="@drawable/ic_genres"/>
+
+    <item
+        android:id="@+id/action_movies"
+        android:title="Movies"
+        android:icon="@drawable/ic_movies"/>
+
+    <item
+        android:id="@+id/action_series"
+        android:title="Series"
+        android:icon="@drawable/ic_play"/>
+
+    <item
+        android:id="@+id/action_episode"
+        android:title="Episode"
+        android:icon="@drawable/ic_episodes"/>
+
+</menu>
