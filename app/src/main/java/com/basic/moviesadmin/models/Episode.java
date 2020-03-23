@@ -1,6 +1,6 @@
 package com.basic.moviesadmin.models;
 
-public class Episodes {
+public class Episode {
 
     public static final String COLLECTION_NAME = "episodes";
 
@@ -11,10 +11,10 @@ public class Episodes {
     private String seriesName;
     private int epiCount;
 
-    public Episodes() {
+    public Episode() {
     }
 
-    public Episodes(String id, String name, String videoLink, String seriesId, String seriesName, int epiCount) {
+    public Episode(String id, String name, String videoLink, String seriesId, String seriesName, int epiCount) {
         this.id = id;
         this.name = name;
         this.videoLink = videoLink;

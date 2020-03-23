@@ -1,23 +1,28 @@
 package com.basic.moviesadmin.adapters;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.basic.moviesadmin.R;
 import com.basic.moviesadmin.SeriesFragment;
+import com.basic.moviesadmin.models.Episode;
 import com.basic.moviesadmin.models.Series;
 import com.basic.moviesadmin.ui.SeriesBottomSheet;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -87,8 +92,8 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            int position = getAdapterPosition();
+                            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            final int position = getAdapterPosition();
 
                             switch (which) {
                                 case 0:
@@ -96,9 +101,78 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
                                     bottomSheet.show(seriesFragment.getFragmentManager(), "Edit Series");
                                     break;
                                 case 1:
-                                    db.collection(Series.COLLECTION_NAME)
-                                            .document(series.get(position).getId())
-                                            .delete();
+                                    AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(seriesFragment.getContext());
+
+                                    builder1.setTitle("Are you sure you want to delete?");
+
+                                    builder1.setPositiveButton(seriesFragment.getResources().getString(R.string.alert_dialog_ok), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            db.collection(Series.COLLECTION_NAME)
+                                                    .document(series.get(position).getId())
+                                                    .delete()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    // series delete inside episode
+                                                    db.collection(Episode.COLLECTION_NAME)
+                                                            .get()
+                                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                                @Override
+                                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                                                                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                                                                        Episode episode = doc.toObject(Episode.class);
+
+                                                                        if (episode.getSeriesId().equals(series.get(position).getId())) {
+
+                                                                            db.collection(Episode.COLLECTION_NAME)
+                                                                                    .document(episode.getId())
+                                                                                    .delete()
+                                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                        @Override
+                                                                                        public void onSuccess(Void aVoid) {
+                                                                                            Toast.makeText(seriesFragment.getContext(), "Series Delete Success!", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    })
+                                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                                        @Override
+                                                                                        public void onFailure(@NonNull Exception e) {
+                                                                                            Toast.makeText(seriesFragment.getContext(), "Series Delete Failed! Please try again!", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    });
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(seriesFragment.getContext(), "Series Delete Failed! Please try again!", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(seriesFragment.getContext(), "Series Delete Failed! Please try again!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    builder1.setNegativeButton(seriesFragment.getResources().getString(R.string.alert_dialog_cancel), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    builder1.show();
+
+
 
                             }
                         }

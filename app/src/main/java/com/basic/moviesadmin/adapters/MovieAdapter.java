@@ -19,6 +19,8 @@ import com.basic.moviesadmin.R;
 import com.basic.moviesadmin.models.Movie;
 import com.basic.moviesadmin.ui.MovieBottomSheet;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -89,8 +91,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHOl
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            int position = getAdapterPosition();
+                            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            final int position = getAdapterPosition();
 
                             switch (which) {
                                 case 0:
@@ -98,9 +100,39 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHOl
                                     bottomSheet.show(moviesFragment.getFragmentManager(), "Edit Movie");
                                     break;
                                 case 1:
-                                    db.collection(Movie.COLLECTION_NAME)
-                                            .document(movies.get(position).getId())
-                                            .delete();
+                                    AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(moviesFragment.getContext());
+
+                                    builder1.setTitle("Are you sure you want to delete?");
+
+                                    builder1.setPositiveButton(moviesFragment.getResources().getString(R.string.alert_dialog_ok), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            db.collection(Movie.COLLECTION_NAME)
+                                                    .document(movies.get(position).getId())
+                                                    .delete()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(moviesFragment.getContext(), "Movie Delete Success!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(moviesFragment.getContext(), "Movie Delete Failed! Please try again!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    builder1.setNegativeButton(moviesFragment.getResources().getString(R.string.alert_dialog_cancel), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    builder1.show();
                             }
 
                         }

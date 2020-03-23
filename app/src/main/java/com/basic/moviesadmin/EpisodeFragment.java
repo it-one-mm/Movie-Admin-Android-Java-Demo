@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.basic.moviesadmin.adapters.EpisodeAdapter;
-import com.basic.moviesadmin.models.Episodes;
+import com.basic.moviesadmin.models.Episode;
 import com.basic.moviesadmin.ui.EpisodeFormBottomSheet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.EventListener;
@@ -65,7 +65,7 @@ public class EpisodeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        db.collection(Episodes.COLLECTION_NAME)
+        db.collection(Episode.COLLECTION_NAME)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -75,10 +75,10 @@ public class EpisodeFragment extends Fragment {
                             return;
                         }
 
-                        ArrayList<Episodes> episodes = new ArrayList<>();
+                        ArrayList<Episode> episodes = new ArrayList<>();
                         for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
-                            Episodes episodes1 = doc.toObject(Episodes.class);
-                            episodes.add(episodes1);
+                            Episode episode1 = doc.toObject(Episode.class);
+                            episodes.add(episode1);
 
                         }
 

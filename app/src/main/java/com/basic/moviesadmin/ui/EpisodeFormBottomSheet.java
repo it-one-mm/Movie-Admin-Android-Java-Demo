@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.basic.moviesadmin.R;
-import com.basic.moviesadmin.models.Episodes;
+import com.basic.moviesadmin.models.Episode;
 import com.basic.moviesadmin.models.Series;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,11 +32,11 @@ public class EpisodeFormBottomSheet extends  BaseBottomSheet{
     private ArrayList<Series> series1 = new ArrayList<>();
     private int selectedSeriesPosition = 0;
 
-    Episodes episodes = null;
+    Episode episode = null;
 
     public EpisodeFormBottomSheet() {}
-    public EpisodeFormBottomSheet(Episodes episodes) {
-        this.episodes = episodes;
+    public EpisodeFormBottomSheet(Episode episode) {
+        this.episode = episode;
     }
 
     @Nullable
@@ -51,7 +51,7 @@ public class EpisodeFormBottomSheet extends  BaseBottomSheet{
         final Button btnSave = view.findViewById(R.id.btn_epi_save);
         final Spinner seriesSpinner = view.findViewById(R.id.sp_series);
 
-        if (episodes != null) {
+        if (episode != null) {
             addEpisode.setText("Edit Episode");
         }
 
@@ -105,28 +105,28 @@ public class EpisodeFormBottomSheet extends  BaseBottomSheet{
 
                 String epiId;
 
-                if (episodes != null) {
+                if (EpisodeFormBottomSheet.this.episode != null) {
 
-                    epiId = episodes.getId();
+                    epiId = EpisodeFormBottomSheet.this.episode.getId();
                 }else {
                     epiId = UUID.randomUUID().toString();
                 }
 
-                final Episodes episodes = new Episodes(epiId, epiName, videoLink,
+                final Episode episode = new Episode(epiId, epiName, videoLink,
                         series1.get(selectedSeriesPosition).getId(),
                         series1.get(selectedSeriesPosition).getTitle(),
                         series1.get(selectedSeriesPosition).getEpisodeCount());
 
-                db.collection(Episodes.COLLECTION_NAME)
+                db.collection(Episode.COLLECTION_NAME)
                         .document(epiId)
-                        .set(episodes)
+                        .set(episode)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
 
                                 Toast.makeText(getContext(), "save success", Toast.LENGTH_SHORT).show();
 
-                                if (episodes != null) {
+                                if (episode != null) {
                                     dismiss();
                                     return;
                                 }
