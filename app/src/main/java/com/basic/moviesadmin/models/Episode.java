@@ -8,18 +8,18 @@ public class Episode {
     private String name;
     private String videoLink;
     private String seriesId;
-    private String seriesName;
+    private String seriesTitle;
     private int epiCount;
 
     public Episode() {
     }
 
-    public Episode(String id, String name, String videoLink, String seriesId, String seriesName, int epiCount) {
+    public Episode(String id, String name, String videoLink, String seriesId, String seriesTitle, int epiCount) {
         this.id = id;
         this.name = name;
         this.videoLink = videoLink;
         this.seriesId = seriesId;
-        this.seriesName = seriesName;
+        this.seriesTitle = seriesTitle;
         this.epiCount = epiCount;
     }
 
@@ -55,12 +55,12 @@ public class Episode {
         this.seriesId = seriesId;
     }
 
-    public String getSeriesName() {
-        return seriesName;
+    public String getSeriesTitle() {
+        return seriesTitle;
     }
 
-    public void setSeriesName(String seriesName) {
-        this.seriesName = seriesName;
+    public void setSeriesTitle(String seriesTitle) {
+        this.seriesTitle = seriesTitle;
     }
 
     public int getEpisodeCount() {

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.basic.moviesadmin.EpisodeFragment;
 import com.basic.moviesadmin.R;
 import com.basic.moviesadmin.models.Episode;
-import com.basic.moviesadmin.models.Movie;
 import com.basic.moviesadmin.ui.EpisodeFormBottomSheet;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +45,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
 
 //        holder.epiCount.setText(episodes.get(position).getEpisodeCount());
         holder.epiNameTV.setText("Episode name: " + episodes.get(position).getName());
-        holder.seriesNameTextView.setText("Series name: " + episodes.get(position).getSeriesName());
+        holder.seriesNameTextView.setText("Series name: " + episodes.get(position).getSeriesTitle());
         holder.noTextView.setText("No. " + (position + 1) );
 
     }

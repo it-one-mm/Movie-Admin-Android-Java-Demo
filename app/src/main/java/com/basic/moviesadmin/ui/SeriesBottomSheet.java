@@ -17,11 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.basic.moviesadmin.R;
+import com.basic.moviesadmin.models.Episode;
 import com.basic.moviesadmin.models.Genre;
 import com.basic.moviesadmin.models.Series;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -144,20 +144,60 @@ public class SeriesBottomSheet extends BaseBottomSheet {
                     id = UUID.randomUUID().toString();
                 }
 
-                final Series series = new Series(id, title, desc, epiCount, imageUrl,
+                final Series saveSeries = new Series(id, title, desc, epiCount, imageUrl,
                         genres.get(selectedGenrePosition).getId(),
                         genres.get(selectedGenrePosition).getName());
 
                 db.collection(Series.COLLECTION_NAME)
                         .document(id)
-                        .set(series)
+                        .set(saveSeries)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
 
                                 Toast.makeText(view.getContext(), "Save Success", Toast.LENGTH_SHORT).show();
 
-                                if (SeriesBottomSheet.this.series != null) {
+                                if (series != null) {
+                                    // series update inside episode
+                                    db.collection(Episode.COLLECTION_NAME)
+                                            .get()
+                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                                                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                                                        Episode episode = doc.toObject(Episode.class);
+
+                                                        if (episode.getSeriesId().equals(series.getId())) {
+
+                                                            episode.setSeriesTitle(series.getTitle());
+
+                                                            db.collection(Episode.COLLECTION_NAME)
+                                                                    .document(episode.getId())
+                                                                    .set(episode)
+                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(view.getContext(), "Series Update Failed! Please try again!", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                        }
+                                                    }
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(view.getContext(), "Series Update Failed! Please try again!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
                                     dismiss();
                                     return;
                                 }
