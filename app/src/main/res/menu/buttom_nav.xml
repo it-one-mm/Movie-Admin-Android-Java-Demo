@@ -21,4 +21,9 @@
         android:title="Episode"
         android:icon="@drawable/ic_episodes"/>
 
+    <item
+        android:id="@+id/action_slide"
+        android:title="Slide"
+        android:icon="@drawable/ic_slide_show"/>
+
 </menu>

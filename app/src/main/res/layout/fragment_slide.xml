@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SlideFragment">
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:paddingLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edbg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/slide1"
+            android:hint="Slide 1"
+            />
+               <EditText
+                   android:paddingLeft="10dp"
+                   android:layout_marginTop="20dp"
+            android:background="@drawable/edbg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/slide2"
+            android:hint="Slide 2"
+            />
+           <EditText
+               android:paddingLeft="10dp"
+               android:layout_marginTop="20dp"
+            android:background="@drawable/edbg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/slide3"
+            android:hint="Slide 3"
+            />
+           <EditText
+               android:paddingLeft="10dp"
+               android:layout_marginTop="20dp"
+            android:background="@drawable/edbg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/slide4"
+            android:hint="Slide 4"
+            />
+           <EditText android:layout_marginTop="20dp"
+               android:paddingLeft="10dp"
+               android:background="@drawable/edbg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/slide5"
+            android:hint="Slide 5"
+            />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/save"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorSuccess"/>
+         <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancel"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorError"/>
+
+    </LinearLayout>
+
+</FrameLayout>
